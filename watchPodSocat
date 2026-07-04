@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# This bash script watches the logs of the socatProxy container running in
+# the podmanExample pod
+
+if podman ps --format="{{.Names}}" | grep -q example_socatproxy_pod ; then   
+
+  reset
+  echo ""
+  echo Watching socat proxies inside the podmanExample pod
+  echo ""
+  echo "------------------------------------------------------------------------"
+  echo ""
+  cat socatProxy/entrypoint.sh
+  echo ""
+  echo "------------------------------------------------------------------------"
+  echo ""
+
+  podman logs -f example_socatproxy_pod
+
+else 
+  echo You MUST run the runPod first!
+fi
+

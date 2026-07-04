@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# This bash script builds the pyTools container
+
+if podman image exists pytools ; then
+  podman image rm pytools
+fi
+
+cd pyTools
+
+podman build --tag pytools .

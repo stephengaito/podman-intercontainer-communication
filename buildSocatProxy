@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# This bash script builds the socatproxy container
+
+if podman image exists socatproxy ; then
+  podman image rm socatproxy
+fi
+
+cd socatProxy
+
+podman build --tag socatproxy .

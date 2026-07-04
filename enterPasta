@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# This bash script enters the running pasta based pyTools container
+
+if podman container exists example_pytools_pasta ; then
+
+  reset
+  echo ""
+  echo Entering pyTools pasta container
+  echo ""
+  echo "------------------------------------------------------------------------"
+  echo ""
+
+  podman exec -it example_pytools_pasta /bin/bash
+else
+  echo You MUST run the runPasta script first!
+fi

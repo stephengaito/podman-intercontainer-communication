@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# This bash script creates the pod
+
+if podman network exists podmanDual ; then
+
+  echo To re-create the pod you MUST deletePod first
+  exit 1
+
+else
+
+  mkdir -p /tmp/podmanExample
+  rm -rf /tmp/podmanExample/*
+
+  podman network create               \
+    --driver=bridge                   \
+    --subnet=10.89.0.0/16             \
+    --gateway=10.89.0.1               \
+    --ipv6                            \
+    --subnet=fd52:2a5a:747e:3acd::/64 \
+    --gateway=fd52:2a5a:747e:3acd::1  \
+    podmanDual
+
+  podman pod create      \
+    --share=net          \
+    --network=podmanDual \
+    --publish=8087:8087  \
+    podmanExample
+
+  podman container create                          \
+    --pod=podmanExample                            \
+    --volume=/tmp/podmanExample:/tmp/podmanExample \
+    --name=example_pytools_pod                     \
+    pytools:latest                                 \
+    /serverPod8087.py
+    
+  podman container create                          \
+    --pod=podmanExample                            \
+    --volume=/tmp/podmanExample:/tmp/podmanExample \
+    --name=example_socatproxy_pod                  \
+    socatproxy:latest
+
+fi
+

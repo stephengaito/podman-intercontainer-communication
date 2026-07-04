@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# This bash script enters the running pasta based pyTools container
+
+if podman container exists example_socatproxy_pod ; then
+
+  reset
+  echo ""
+  echo Entering socatProxy container in the podmanExample pod
+  echo ""
+  echo "------------------------------------------------------------------------"
+  echo ""
+
+  podman exec -it example_socatproxy_pod /bin/ash
+else
+  echo You MUST run the runPod script first!
+fi

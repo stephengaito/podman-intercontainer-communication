@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# This bash script runs the pyTools container on its own pasta network and
+# also mounts /tmp to allow access to unix sockets.
+
+mkdir -p /tmp/podmanExample
+
+if podman image exists pytools:latest ; then
+
+  reset
+  echo ""
+  echo Running pyTools serverPasta8089 in a Pasta based container
+  echo ""
+  echo "------------------------------------------------------------------------"
+  echo ""
+    
+  podman run                                       \
+    --rm -it --network=pasta                       \
+    --volume=/tmp/podmanExample:/tmp/podmanExample \
+    --publish=8089:8089                            \
+    --name=example_pytools_pasta                   \
+    --hostname=pasta8089                           \
+    pytools:latest                                 \
+    /serverPasta8089.py
+
+else
+  echo You MUST run the buildPyTools script first!
+fi

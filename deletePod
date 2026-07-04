@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# This bash script removes the pod
+
+podman container rm example_pytools_pod
+    
+podman container rm example_socatproxy_pod
+
+podman pod rm podmanExample
+
+podman network rm podmanDual

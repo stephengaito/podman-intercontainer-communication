@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# This bash script starts the podmanExample pod
+
+mkdir -p /tmp/podmanExample
+rm -rf /tmp/podmanExample/*
+
+if podman pod exists podmanExample ; then   
+  podman pod start podmanExample
+
+  echo ""
+  podman ps
+  echo ""
+
+else 
+  echo You MUST run the createPod first!
+fi
+

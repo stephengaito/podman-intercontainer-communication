@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# This bash script removes the socatProxy image
+
+if podman image exists socatproxy:latest ; then
+  podman image rm socatproxy:latest
+fi
+
+if podman image exists docker.io/library/alpine:latest ; then
+  echo "You are about to remove the docker.io/library/alpine image"
+  echo "type ^C to stop, or enter to continue"
+  read
+  podman image rm docker.io/library/alpine:latest
+fi

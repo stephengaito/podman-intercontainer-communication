@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# This bash script removes the pyTools image
+
+if podman image exists pytools ; then
+  podman image rm pytools
+fi
+
+if podman image exists docker.io/library/python:trixie ; then
+  echo "You are about to remove the docker.io/library/python image"
+  echo "type ^C to stop, or enter to continue"
+  read
+  podman image rm docker.io/library/python:trixie
+fi

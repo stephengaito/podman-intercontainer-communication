@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# This bash script tails the output from the serverPasta8089 server
+# running in a pasta based container
+
+if podman ps --format="{{.Names}}" | grep -q example_pytools_pasta ; then   
+
+  reset
+  echo ""
+  echo Watching pyTools serverPasta8089 running inside a Pasta based container
+  echo ""
+  echo "------------------------------------------------------------------------"
+  echo ""
+
+  tail -f --lines=100 /tmp/podmanExample/serverPasta8089.log
+
+else 
+  echo You MUST run the runPasta first!
+fi
+

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# This bash script stops the podmanExample pod
+
+if podman pod exists podmanExample ; then   
+  podman pod stop podmanExample
+
+  echo ""
+  podman ps
+  echo ""
+
+  mkdir -p /tmp/podmanExample
+  rm -rf /tmp/podmanExample/*
+
+else 
+  echo You MUST run the createPod first!
+fi
+

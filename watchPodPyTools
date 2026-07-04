@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# This bash script tails the output from the serverPod8089 server running
+# in a container in the podmanExample pod
+
+if podman ps --format="{{.Names}}" | grep -q example_pytools_pod ; then   
+
+  reset
+  echo ""
+  echo Watching pyTools serverPod8087 in a container in the podmanExample pod
+  echo ""
+  echo "------------------------------------------------------------------------"
+  echo ""
+
+  tail -f --lines=100 /tmp/podmanExample/serverPod8087.log
+
+else 
+  echo You MUST run the runPod first!
+fi
+
